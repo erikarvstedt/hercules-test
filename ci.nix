@@ -7,11 +7,15 @@ builtins.mapAttrs (system: _v:
     };
     pkgs = import src { inherit system; };
   in
-    pkgs.recurseIntoAttrs {
+    pkgs.recurseIntoAttrs rec {
       # These two attributes will appear in your job for each platform.
       hello = pkgs.hello;
       cow-hello = import ./main.nix pkgs;
       long = import ./long.nix pkgs;
+      a1 = pkgs.runCommand "a1" {} ''
+        mkdir $out
+        echo hello ${long} > $out/a
+      '';
     }
 ) {
   x86_64-linux = {};
