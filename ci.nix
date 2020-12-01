@@ -11,6 +11,7 @@ builtins.mapAttrs (system: _v:
       # These two attributes will appear in your job for each platform.
       hello = pkgs.hello;
       cow-hello = import ./main.nix pkgs;
+      long = import ./long.nix pkgs;
     }
 ) {
   x86_64-linux = {};
